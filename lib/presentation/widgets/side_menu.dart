@@ -30,14 +30,15 @@ class SideMenuState extends ConsumerState<SideMenu> {
         
       },
       children: [
+        const SizedBox(height: 20),
         Padding(
           padding: EdgeInsets.fromLTRB(20, hasNotch ? 0 : 20, 16, 0),
-          child: Text('Saludos', style: textStyles.titleMedium ),
+          child: Text('Hola!', style: textStyles.headlineLarge ),
         ),
 
         Padding(
           padding: const EdgeInsets.fromLTRB(20, 0, 16, 10),
-          child: Text('Tony Stark', style: textStyles.titleSmall ),
+          child: Text('Joaquin', style: textStyles.headlineSmall ),
         ),
 
         const NavigationDrawerDestination(
