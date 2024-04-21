@@ -18,7 +18,6 @@ class SideMenuState extends ConsumerState<SideMenu> {
   
   @override
   Widget build(BuildContext context) {
-    final hasNotch = MediaQuery.of(context).viewPadding.top > 35;
     final textStyles = Theme.of(context).textTheme;
   
     return Drawer(
