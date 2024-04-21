@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class SideMenu extends ConsumerStatefulWidget {
   
@@ -20,44 +21,59 @@ class SideMenuState extends ConsumerState<SideMenu> {
     final hasNotch = MediaQuery.of(context).viewPadding.top > 35;
     final textStyles = Theme.of(context).textTheme;
   
-    return NavigationDrawer(
-      elevation: 1,
-      selectedIndex: navDrawerIndex,
-      onDestinationSelected: (value) {
-        setState(() {
-          navDrawerIndex = value;
-        });
-        
-      },
-      children: [
-        const SizedBox(height: 20),
-        Padding(
-          padding: EdgeInsets.fromLTRB(20, hasNotch ? 0 : 20, 16, 0),
-          child: Text('Hola!', style: textStyles.headlineLarge ),
-        ),
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          const SizedBox(height: 60),
 
-        Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 16, 10),
-          child: Text('Joaquin', style: textStyles.headlineSmall ),
-        ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 16, 10),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Column(
+                children: [
+                  Text('Hola!', style: textStyles.headlineLarge),
+                  Text('Joaquin', style: textStyles.headlineSmall),
+                ],
+              ),
+            )
+          ),
+          const SizedBox(height: 10),
+          ListTile(
+            leading: const Icon(Icons.home_rounded, size: 30),
+            title: Text('Productos', style: textStyles.bodyLarge),
+            onTap: () => context.pop(),
+          ),
 
-        const NavigationDrawerDestination(
-            icon: Icon( Icons.home_outlined ), 
-            label: Text( 'Productos' ),
-        ),
+          const Divider(),
+          const SizedBox(height: 15),
 
-
-        const Padding(
-          padding: EdgeInsets.fromLTRB(28, 16, 28, 10),
-          child: Divider(),
-        ),
-
-        const Padding(
-          padding: EdgeInsets.fromLTRB(28, 10, 16, 10),
-          child: Text('Otras opciones'),
-        ),
-
-      ] 
+          ListTile(
+            leading: const Icon(Icons.location_on_rounded, size: 30),
+            title: Text('Encontranos', style: textStyles.bodyLarge),
+            onTap: () => context.push('/location'),
+          ),
+          const SizedBox(height: 15),
+          ListTile(
+            leading: const Icon(Icons.wallet_rounded, size: 30),
+            title: Text('Mis pedidos', style: textStyles.bodyLarge),
+            onTap: () => context.push('/orders'),
+          ),
+          const SizedBox(height: 15),
+          ListTile(
+            leading: const Icon(Icons.card_giftcard_rounded, size: 30),
+            title: Text('Mis cupones', style: textStyles.bodyLarge),
+            onTap: () => context.push('/cupons'),
+          ),
+          const SizedBox(height: 15),
+          ListTile(
+            leading: const Icon(Icons.person, size: 30),
+            title: Text('Mi cuenta', style: textStyles.bodyLarge),
+            onTap: () => context.push('/account'),
+          ),
+        ],
+      ),
     );
   }
 }
